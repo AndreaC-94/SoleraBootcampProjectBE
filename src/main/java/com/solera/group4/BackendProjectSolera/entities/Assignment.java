@@ -1,4 +1,4 @@
-package com.solera.group4.BackendProjectSolera.entities;
+package com.solera.group4.mainFolder.entities;
 
 public class Assignment {
 	private String name;
