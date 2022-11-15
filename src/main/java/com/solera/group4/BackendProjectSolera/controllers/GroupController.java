@@ -1,4 +1,4 @@
-package com.solera.group4.mainFolder.controllers;
+package com.solera.group4.BackendProjectSolera.controllers;
 
 import java.util.Arrays;
 import java.util.List;
