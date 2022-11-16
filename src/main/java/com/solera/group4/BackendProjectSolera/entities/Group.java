@@ -4,6 +4,8 @@ package com.solera.group4.BackendProjectSolera.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -11,13 +13,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Component
-@NoArgsConstructor
-@Setter
-@Getter
+@Document
 public class Group {
 
+	@Id
     private Integer id;
+	
 	private String name;
     private List<Assignment> assignmentList;
     private int points;
@@ -57,6 +58,10 @@ public class Group {
 
 	public void setAssignmentList(List<Assignment> assignmentList) {
 		this.assignmentList = assignmentList;
+	}
+	
+	public void setNewAssignment(String name, String desc, int score) {
+		this.assignmentList.add(new Assignment(name, desc, score));
 	}
 
 	public int getPoints() {
