@@ -1,4 +1,4 @@
-package com.solera.group4.BackendProjectSolera.entities;
+package com.solera.group4.spring.backend.entitites;
 
 
 import java.util.ArrayList;
@@ -13,19 +13,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Document
+@Document(collection = "groups")
 public class Group {
 
 	@Id
     private Integer id;
-	
 	private String name;
     private List<Assignment> assignmentList;
     private int points;
     
-	public Group(String name, int id) {
+	public Group(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.assignmentList = new ArrayList<Assignment>();
 		this.points = 0;
@@ -61,7 +59,10 @@ public class Group {
 	}
 	
 	public void setNewAssignment(String name, String desc, int score) {
-		this.assignmentList.add(new Assignment(name, desc, score));
+		Assignment newAssign = new Assignment(name, desc, score);
+		// newAssign.setId(SomeGlobalAssignmentValue);
+		this.assignmentList.add(newAssign);
+		this.points += score;
 	}
 
 	public int getPoints() {
