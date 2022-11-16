@@ -12,13 +12,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Group {
 
 	@Id
-    private Integer id;
 	private String name;
     private List<Assignment> assignmentList;
     private int points;
     
 	public Group(String name) {
-		super();
 		this.name = name;
 		this.assignmentList = new ArrayList<Assignment>();
 		this.points = 0;
@@ -26,15 +24,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", assignmentList=" + assignmentList + ", points=" + points + "]";
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		return "Group [name=" + name + ", assignmentList=" + assignmentList + ", points=" + points + "]";
 	}
 
 	public String getName() {
@@ -67,6 +57,4 @@ public class Group {
 	public void setPoints(int points) {
 		this.points = points;
 	}
-    
-    
 }
