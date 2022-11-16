@@ -1,4 +1,4 @@
-package com.solera.group4.spring.backend.entitites;
+package entitites;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -1,4 +1,4 @@
-package com.solera.group4.spring.backend.configurations;
+package configurations;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
