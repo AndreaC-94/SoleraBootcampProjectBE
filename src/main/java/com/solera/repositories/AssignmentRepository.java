@@ -7,5 +7,7 @@ import com.solera.entities.Assignment;
 
 @Repository
 public interface AssignmentRepository extends MongoRepository<Assignment, String>{
-    
+
+    boolean existsById(int id);
+    boolean existsByName(String name);
 }

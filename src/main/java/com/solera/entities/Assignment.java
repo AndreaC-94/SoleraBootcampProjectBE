@@ -1,12 +1,17 @@
 package com.solera.entities;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection ="Assignments")
 public class Assignment {
 	
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+
 	@Id
+	private int id;
 	private String name;
 	private String description;
 	private int point;
@@ -14,12 +19,17 @@ public class Assignment {
 	
 	
 	public Assignment(String name, String description, int point) {
+		this.id = ID_GENERATOR.getAndIncrement();
 		this.name = name;
 		this.description = description;
 		this.point = point;
 		this.done = false;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public boolean isDone() {
 		return done;
 	}

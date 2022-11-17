@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.solera.controllers.AssignmentController;
 
 
 @Document(collection = "groups")
 public class Group {
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(6);
+	@Autowired
+	private AssignmentController assignmentController;
 
 	@Id
 	private int id;

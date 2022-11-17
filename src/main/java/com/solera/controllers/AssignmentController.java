@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.solera.DTO.AssignmentDTO;
 import com.solera.entities.Assignment;
 import com.solera.services.AssignmentService;
 
@@ -22,26 +23,27 @@ import com.solera.services.AssignmentService;
 public class AssignmentController {
     
     @Autowired
-    AssignmentService assignmentService;
+    private AssignmentService assignmentService;
 
     @GetMapping
     public ResponseEntity<?> getAssignments(){
-        try{
-            List<Assignment> assignments = assignmentService.getAssignments();
-            return new ResponseEntity<List<Assignment>>(assignments, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
-        }
+         try{
+             List<Assignment> assignments = assignmentService.getAssignments();
+             return new ResponseEntity<List<Assignment>>(assignments, HttpStatus.OK);
+         }catch(Exception e){
+             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+         }
+        //return assignmentService.getAssignments();
     }
 
-    @PostMapping
+    @PostMapping("/createAssignment")
     @Transactional
-    public ResponseEntity<?> createAssignment(@RequestBody Assignment assignment){
+    public ResponseEntity<?> createAssignment(@RequestBody AssignmentDTO assignment){
         try{
             String msg = assignmentService.createAssignment(assignment);
+            return new ResponseEntity(msg, HttpStatus.CREATED);
         }catch(Exception e){
-
+            return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
         }
-        return null;
     }
 }

@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.solera.DTO.GroupDTO;
 import com.solera.entities.Group;
-import com.solera.entities.GroupDTO;
 import com.solera.repositories.GroupRepository;
 
 @Service
 public class GroupServices {
 
     @Autowired
-    GroupRepository groupRepository;
+    private GroupRepository groupRepository;
 
     public List<Group> getAllGroup() {
         List<Group> groups = groupRepository.findAll();

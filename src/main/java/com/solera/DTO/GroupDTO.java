@@ -1,4 +1,4 @@
-package com.solera.entities;
+package com.solera.DTO;
 
 import org.springframework.stereotype.Component;
 

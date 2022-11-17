@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.solera.DTO.GroupDTO;
 import com.solera.entities.Group;
-import com.solera.entities.GroupDTO;
 import com.solera.services.GroupServices;
 
 @RestController
 public class GroupController {
     
     @Autowired
-    GroupServices groupServices;
+    private GroupServices groupServices;
 
     @GetMapping("/getAll")
     public List<Group> getAllGroup(){
