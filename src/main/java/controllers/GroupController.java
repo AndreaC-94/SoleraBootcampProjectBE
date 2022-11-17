@@ -24,8 +24,7 @@ public class GroupController {
     @Autowired
     GroupServices groupServices;
 
-    @GetMapping
-    @RequestMapping("/getAll")
+    @GetMapping("/getAll")
     public List<Group> getAllGroup(){
         return groupServices.getAllGroup();
     }
