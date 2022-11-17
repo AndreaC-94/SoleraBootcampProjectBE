@@ -1,4 +1,4 @@
-package entities;
+package com.solera.entities;
 
 
 import java.util.ArrayList;

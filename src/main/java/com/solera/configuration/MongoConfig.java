@@ -1,4 +1,4 @@
-package configurations;
+package com.solera.configuration;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
