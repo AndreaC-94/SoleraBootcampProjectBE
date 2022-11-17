@@ -1,4 +1,4 @@
-package controllers;
+package com.solera.controllers;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.Group;
-import services.GroupServices;
+import com.solera.entities.Group;
+import com.solera.services.GroupServices;
 
 @RestController
 public class GroupController {
