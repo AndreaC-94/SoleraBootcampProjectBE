@@ -10,13 +10,23 @@ public class Assignment {
 	private String name;
 	private String description;
 	private int point;
+	private boolean done;
+	
 	
 	public Assignment(String name, String description, int point) {
 		this.name = name;
 		this.description = description;
 		this.point = point;
 	}
+	
+	public boolean isDone() {
+		return done;
+	}
 
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+	
 	public String getName() {
 		return name;
 	}
