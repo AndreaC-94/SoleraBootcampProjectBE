@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.solera.entities.Group;
+import com.solera.entities.GroupDTO;
 import com.solera.repositories.GroupRepository;
 
 @Service
@@ -22,26 +23,25 @@ public class GroupServices {
     }
     
     public String createGroup(String group) throws Exception {
-        System.out.println("service " + group);
-        if(groupRepository.existsById(group)) throw new Exception("This group name already exists, pick a different name please.");
+        if(groupRepository.existsByName(group)) throw new Exception("This group name already exists, pick a different name please.");
         else{
             groupRepository.save(new Group (group));
             return "A new group named " + group + " created!";
         }
     }
     
-    public String deleteGroup(String groupName) {
-        if(groupRepository.existsById(groupName)){
-            groupRepository.deleteById(groupName);
-            return "Group \"" + groupName + "\" has been deleted.";
+    public String deleteGroup(GroupDTO groupData) {
+        if(groupRepository.existsById(groupData.getGroupID())){
+            groupRepository.deleteById(groupData.getGroupID());
+            return "Group \"" + groupData.getGroupName() + "\" has been deleted.";
         }
-        return "The group \"" + groupName + "\" does not exist, enter a valid group name.";
+        return "The group \"" + groupData.getGroupName() + "\" does not exist, enter a valid group name.";
     }
     
     public String editGroup(String groupNameNow, String groupNameNew) throws Exception {
         //TODO
         createGroup(groupNameNew);
-        deleteGroup(groupNameNow);
+        //deleteGroup(groupNameNow);
 
         return "Group \"" + groupNameNow + "\" has been changed to \"" + groupNameNew + "\"";
     }

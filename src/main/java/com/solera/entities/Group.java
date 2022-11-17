@@ -3,6 +3,7 @@ package com.solera.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,21 +11,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "groups")
 public class Group {
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
 	@Id
+	private int id;
 	private String name;
     private List<Assignment> assignmentList;
     private int points;
     
 	public Group(String name) {
+		this.id = ID_GENERATOR.getAndIncrement();
 		this.name = name;
 		this.assignmentList = new ArrayList<Assignment>();
 		this.points = 0;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Group [name=" + name + ", assignmentList=" + assignmentList + ", points=" + points + "]";
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
