@@ -1,10 +1,8 @@
 package com.solera.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.solera.entities.Group;
@@ -40,8 +38,8 @@ public class GroupServices {
     
     public String editGroup(String groupNameNow, String groupNameNew) throws Exception {
         //TODO
-        createGroup(groupNameNew);
-        deleteGroup(groupNameNow);
+    	
+    	groupRepository.findById(groupNameNow).get().setName(groupNameNew);
 
         return "Group \"" + groupNameNow + "\" has been changed to \"" + groupNameNew + "\"";
     }
