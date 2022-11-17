@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.solera.entities.Group;
+import com.solera.entities.GroupDTO;
 import com.solera.services.GroupServices;
 
 @RestController
@@ -31,22 +32,19 @@ public class GroupController {
     @Transactional
     public ResponseEntity<String> createGroup(@PathVariable("name") String group){
         try{
-            //TODO Add validation
-            System.out.println("controll " + group);
             String message = groupServices.createGroup(group);
             return new ResponseEntity(message, HttpStatus.CREATED);
         }catch(Exception e){
-            //String errorMessage ="something went wrong";
             return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
 
     @DeleteMapping("/deleteGroup")
     @Transactional
-    public ResponseEntity<String> deleteGroup(String groupName){
+    public ResponseEntity<String> deleteGroup(GroupDTO groupData){
         try{
             //TODO Add validation
-            String message = groupServices.deleteGroup(groupName);
+            String message = groupServices.deleteGroup(groupData);
             return new ResponseEntity(message, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);

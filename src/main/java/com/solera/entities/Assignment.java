@@ -17,6 +17,7 @@ public class Assignment {
 		this.name = name;
 		this.description = description;
 		this.point = point;
+		this.done = false;
 	}
 	
 	public boolean isDone() {

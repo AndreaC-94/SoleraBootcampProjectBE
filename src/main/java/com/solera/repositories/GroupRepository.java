@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.solera.entities.Group;
 
 @Repository
-public interface GroupRepository extends MongoRepository<Group, String>{
-
+public interface GroupRepository extends MongoRepository<Group, Integer>{
+    public Group findByName(String name);
+    public boolean existsByName(String name);
 }
