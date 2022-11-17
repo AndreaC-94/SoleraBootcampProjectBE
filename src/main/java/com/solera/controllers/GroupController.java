@@ -56,6 +56,7 @@ public class GroupController {
     public ResponseEntity<String> editGroup(String groupNameNow, String groupNameNew) throws Exception{
         //TODO
         String message = groupServices.editGroup(groupNameNow, groupNameNew);
+        //groupRepository.findById(groupNameNow).get().setName(groupNameNew);
         return null;
     }
 }
