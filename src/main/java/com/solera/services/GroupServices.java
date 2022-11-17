@@ -22,6 +22,7 @@ public class GroupServices {
     }
     
     public String createGroup(String group) throws Exception {
+        System.out.println("service " + group);
         if(groupRepository.existsById(group)) throw new Exception("This group name already exists, pick a different name please.");
         else{
             groupRepository.save(new Group (group));

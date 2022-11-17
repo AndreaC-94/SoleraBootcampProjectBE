@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,12 @@ public class GroupController {
         return groupServices.getAllGroup();
     }
 
-    @PostMapping
-    @RequestMapping("/createGroup/{name}")
+    @PostMapping("/createGroup/{name}")
     @Transactional
-    public ResponseEntity<String> createGroup(@PathParam("name")String group){
+    public ResponseEntity<String> createGroup(@PathVariable("name") String group){
         try{
             //TODO Add validation
+            System.out.println("controll " + group);
             String message = groupServices.createGroup(group);
             return new ResponseEntity(message, HttpStatus.CREATED);
         }catch(Exception e){
@@ -43,8 +44,7 @@ public class GroupController {
         }
     }
 
-    @DeleteMapping
-    @RequestMapping("/deleteGroup")
+    @DeleteMapping("/deleteGroup")
     @Transactional
     public ResponseEntity<String> deleteGroup(String groupName){
         try{
