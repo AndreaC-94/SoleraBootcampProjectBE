@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +31,9 @@ public class GroupController {
     }
 
     @PostMapping
-    @RequestMapping("/createGroup")
+    @RequestMapping("/createGroup/{name}")
     @Transactional
-    public ResponseEntity<String> createGroup(String group){
+    public ResponseEntity<String> createGroup(@PathParam("name")String group){
         try{
             //TODO Add validation
             String message = groupServices.createGroup(group);

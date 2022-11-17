@@ -18,26 +18,42 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "cluster0";
+        return "test";
     }
 
     @Override
     public MongoClient mongoClient() {
+        // ConnectionString connectionString = new ConnectionString("mongodb+srv://Andrea:Permongo1@group4Solera.moptybi.mongodb.net/?retryWrites=true&w=majority");
+        // MongoClientSettings settings = MongoClientSettings.builder()
+        //         .applyConnectionString(connectionString)
+        //         .serverApi(ServerApi.builder()
+        //                 .version(ServerApiVersion.V1)
+        //                 .build())
+        //         .build();
+        // MongoClient mongoClient = MongoClients.create(settings);
+        // MongoDatabase database = mongoClient.getDatabase("group4Solera");
+
+        // return mongoClient;
+
         ConnectionString connectionString = new ConnectionString("mongodb+srv://Andrea:Permongo1@cluster0.moptybi.mongodb.net/?retryWrites=true&w=majority");
         MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .serverApi(ServerApi.builder()
-                        .version(ServerApiVersion.V1)
-                        .build())
-                .build();
+        .applyConnectionString(connectionString)
+        .serverApi(ServerApi.builder()
+            .version(ServerApiVersion.V1)
+            .build())
+        .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        MongoDatabase database = mongoClient.getDatabase("cluster0");
-
+        MongoDatabase database = mongoClient.getDatabase("test");
         return mongoClient;
     }
 
     @Override
     public Collection getMappingBasePackages() {
-        return Collections.singleton("com.solera.group4");
+        return Collections.singleton("");
+    }
+
+    @Override
+    protected boolean autoIndexCreation(){
+        return true;
     }
 }
