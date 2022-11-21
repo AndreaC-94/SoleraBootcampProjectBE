@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.solera.DTO.GroupDTO;
@@ -41,7 +42,7 @@ public class GroupController {
 
     @DeleteMapping("/deleteGroup")
     @Transactional
-    public ResponseEntity<String> deleteGroup(GroupDTO groupData){
+    public ResponseEntity<String> deleteGroup(@RequestBody GroupDTO groupData){
         try{
             //TODO Add validation
             String message = groupServices.deleteGroup(groupData);

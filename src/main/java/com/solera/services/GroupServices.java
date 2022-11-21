@@ -29,6 +29,7 @@ public class GroupServices {
     }
     
     public String deleteGroup(GroupDTO groupData) {
+        System.out.println(groupData.getGroupID() + " --- " + groupData.getGroupName());
         if(groupRepository.existsById(groupData.getGroupID())){
             groupRepository.deleteById(groupData.getGroupID());
             return "Group \"" + groupData.getGroupName() + "\" has been deleted.";
