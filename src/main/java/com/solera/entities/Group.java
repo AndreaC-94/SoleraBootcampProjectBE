@@ -1,7 +1,6 @@
 package com.solera.entities;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,6 +14,7 @@ import com.solera.controllers.AssignmentController;
 @Document(collection = "groups")
 public class Group {
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(6);
+
 	@Autowired
 	private AssignmentController assignmentController;
 
@@ -27,7 +27,7 @@ public class Group {
 	public Group(String name) {
 		this.id = ID_GENERATOR.getAndIncrement();
 		this.name = name;
-		this.assignmentList = new ArrayList<Assignment>();
+		this.assignmentList = null;
 		this.points = 0;
 	}
 	

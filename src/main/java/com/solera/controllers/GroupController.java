@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.solera.DTO.GroupDTO;
 import com.solera.entities.Group;
-import com.solera.services.GroupServices;
+import com.solera.services.GroupService;
 
 @RestController
 public class GroupController {
     
     @Autowired
-    private GroupServices groupServices;
+    private GroupService groupServices;
 
     @GetMapping("/getAll")
     public List<Group> getAllGroup(){
@@ -44,7 +44,6 @@ public class GroupController {
     @Transactional
     public ResponseEntity<String> deleteGroup(@RequestBody GroupDTO groupData){
         try{
-            //TODO Add validation
             String message = groupServices.deleteGroup(groupData);
             return new ResponseEntity(message, HttpStatus.OK);
         }catch(Exception e){

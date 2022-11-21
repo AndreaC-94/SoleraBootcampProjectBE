@@ -2,8 +2,6 @@ package com.solera.controllers;
 
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,7 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @GetMapping
+    @GetMapping("/getAssignmets")
     public ResponseEntity<?> getAssignments(){
          try{
              List<Assignment> assignments = assignmentService.getAssignments();
@@ -33,7 +31,12 @@ public class AssignmentController {
          }catch(Exception e){
              return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
          }
-        //return assignmentService.getAssignments();
+    }
+
+    @GetMapping
+    public List<Assignment> getAssignmentsForGroup(){
+             List<Assignment> assignments = assignmentService.getAssignments();
+             return assignments;
     }
 
     @PostMapping("/createAssignment")

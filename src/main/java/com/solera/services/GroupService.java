@@ -6,30 +6,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.solera.DTO.GroupDTO;
+import com.solera.controllers.AssignmentController;
 import com.solera.entities.Group;
 import com.solera.repositories.GroupRepository;
 
 @Service
-public class GroupServices {
+public class GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private AssignmentController assignmentController;
 
     public List<Group> getAllGroup() {
         List<Group> groups = groupRepository.findAll();
         return groups;
     }
     
-    public String createGroup(String group) throws Exception {
-        if(groupRepository.existsByName(group)) throw new Exception("This group name already exists, pick a different name please.");
+    public String createGroup(String groupName) throws Exception {
+        if(groupRepository.existsByName(groupName)) throw new Exception("This group name already exists, pick a different name please.");
         else{
-            groupRepository.save(new Group (group));
-            return "A new group named " + group + " created!";
+            Group group = new Group(groupName);
+            group.setAssignmentList(assignmentController.getAssignmentsForGroup());
+            groupRepository.save(group);
+            return "A new group named " + groupName + " created!";
         }
     }
     
     public String deleteGroup(GroupDTO groupData) {
-        System.out.println(groupData.getGroupID() + " --- " + groupData.getGroupName());
         if(groupRepository.existsById(groupData.getGroupID())){
             groupRepository.deleteById(groupData.getGroupID());
             return "Group \"" + groupData.getGroupName() + "\" has been deleted.";
