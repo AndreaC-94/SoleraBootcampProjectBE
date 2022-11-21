@@ -51,12 +51,15 @@ public class GroupController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/{groupNameNew}")
     @Transactional
-    public ResponseEntity<String> editGroup(String groupNameNow, String groupNameNew) throws Exception{
-        //TODO
-        String message = groupServices.editGroup(groupNameNow, groupNameNew);
-        //groupRepository.findById(groupNameNow).get().setName(groupNameNew);
-        return null;
+    public ResponseEntity<String> editGroup(@RequestBody GroupDTO group,
+    @PathVariable ("groupNameNew") String groupNameNew) throws Exception{
+        try{
+            String message = groupServices.editGroup(group, groupNameNew);
+            return new ResponseEntity<String>(message, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
     }
 }

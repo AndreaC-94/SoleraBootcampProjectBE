@@ -28,5 +28,27 @@ public class AssignmentService {
         return "Assignment saved correctly!";
     }
 
+    public String deleteAssignment(AssignmentDTO assignment) throws Exception {
+        if(assignmentRepository.existsByName(assignment.getName())){
+            assignmentRepository.deleteByName(assignment.getName());
+            return "The assignment \"" + assignment.getName() + "\" has been deleted!";
+        }
+        throw new Exception("There's no assignment called \"" + assignment.getName() + "\".");
+    }
+
+    public String editAssignment(Assignment assignment) throws Exception{
+
+        Assignment tmpAss = assignmentRepository.findById(assignment.getId()).orElseThrow(() -> 
+        new Exception("There's no assignment with id: " + assignment.getId()));
+
+        tmpAss.setName(assignment.getName());
+        tmpAss.setDescription(assignment.getDescription());
+        tmpAss.setDone(assignment.isDone());
+        tmpAss.setPoint(assignment.getPoint());
+
+        assignmentRepository.save(tmpAss);
+        return "The assignment id: " + assignment.getId() + " has been edited correctly!";
+    }
+
 
 }

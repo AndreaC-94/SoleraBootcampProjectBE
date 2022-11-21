@@ -42,11 +42,13 @@ public class GroupService {
         return "The group \"" + groupData.getGroupName() + "\" does not exist, enter a valid group name.";
     }
     
-    public String editGroup(String groupNameNow, String groupNameNew) throws Exception {
-        //TODO
-        createGroup(groupNameNew);
-        //deleteGroup(groupNameNow);
+    public String editGroup(GroupDTO group, String groupNameNew) throws Exception {
+        
+            Group tmpGroup = groupRepository.findById(group.getGroupID()).orElseThrow(() ->
+             new Exception("The id: " + group.getGroupID() + ", is not a valid id."));
 
-        return "Group \"" + groupNameNow + "\" has been changed to \"" + groupNameNew + "\"";
+             tmpGroup.setName(groupNameNew);
+             groupRepository.save(tmpGroup);
+        return "Group \"" + group.getGroupName() + "\" has been changed to \"" + groupNameNew + "\"";
     }
 }
