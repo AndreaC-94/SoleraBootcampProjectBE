@@ -27,7 +27,20 @@ public class GroupService {
     public String createGroup(String groupName) throws Exception {
         if(groupRepository.existsByName(groupName)) throw new Exception("This group name already exists, pick a different name please.");
         else{
+            boolean check = true;
             Group group = new Group(groupName);
+            int a = group.getId();
+            while(check){
+                if(groupRepository.existsById(group.getId()))
+                {
+                    a = group.setID_GENERATOR();
+                    group.setId(a);
+                }
+                else{
+                    check = false;
+                }
+            }
+            group.setID_GENERATOR();
             group.setAssignmentList(assignmentController.getAssignmentsForGroup());
             groupRepository.save(group);
             return "A new group named " + groupName + " created!";

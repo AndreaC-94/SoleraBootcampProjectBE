@@ -4,19 +4,13 @@ package com.solera.entities;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.solera.controllers.AssignmentController;
 
 
 @Document(collection = "groups")
 public class Group {
 	private static AtomicInteger ID_GENERATOR = new AtomicInteger(6);
-
-	@Autowired
-	private AssignmentController assignmentController;
 
 	@Id
 	private int id;
@@ -25,7 +19,7 @@ public class Group {
     private int points;
     
 	public Group(String name) {
-		this.id = ID_GENERATOR.getAndIncrement();
+		this.id = ID_GENERATOR.get();
 		this.name = name;
 		this.assignmentList = null;
 		this.points = 0;
@@ -38,6 +32,10 @@ public class Group {
 	
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -69,5 +67,9 @@ public class Group {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public static int setID_GENERATOR() {
+		return ID_GENERATOR.getAndIncrement();
 	}
 }
