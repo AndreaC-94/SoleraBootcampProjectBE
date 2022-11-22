@@ -25,7 +25,7 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @GetMapping("/getAssignmets")
+    @GetMapping("/getAssignments")
     public ResponseEntity<?> getAssignments(){
          try{
              List<Assignment> assignments = assignmentService.getAssignments();
