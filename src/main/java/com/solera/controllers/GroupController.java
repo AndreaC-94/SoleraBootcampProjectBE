@@ -34,9 +34,9 @@ public class GroupController {
     public ResponseEntity<String> createGroup(@PathVariable("name") String group){
         try{
             String message = groupServices.createGroup(group);
-            return new ResponseEntity(message, HttpStatus.CREATED);
+            return new ResponseEntity<String>(message, HttpStatus.CREATED);
         }catch(Exception e){
-            return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
 
@@ -45,9 +45,20 @@ public class GroupController {
     public ResponseEntity<String> deleteGroup(@RequestBody GroupDTO groupData){
         try{
             String message = groupServices.deleteGroup(groupData);
-            return new ResponseEntity(message, HttpStatus.OK);
+            return new ResponseEntity<String>(message, HttpStatus.OK);
         }catch(Exception e){
-            return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @DeleteMapping("/deleteAllGroups")
+    @Transactional
+    public ResponseEntity<String> deleteAllGroups(){
+        try{
+            String message = groupServices.deleteAllGroups();
+            return new ResponseEntity<String>(message, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         }
     }
 

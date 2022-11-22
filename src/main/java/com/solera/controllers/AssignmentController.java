@@ -63,6 +63,17 @@ public class AssignmentController {
         }
     }
 
+    @DeleteMapping("/deleteAllAssignments")
+    @Transactional
+    public ResponseEntity<String> deleteAllAssignments(){
+        try{
+            String msg = assignmentService.deleteAllAssignments();
+            return new ResponseEntity<String>(msg, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
     @PutMapping("/editAssignment")
     @Transactional
     public ResponseEntity<String> editAssignment(@RequestBody Assignment assignment){

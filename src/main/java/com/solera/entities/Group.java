@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "groups")
 public class Group {
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(6);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 
 	@Id
 	private int id;

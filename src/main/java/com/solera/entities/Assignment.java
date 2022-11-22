@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="Assignments")
 public class Assignment {
 	
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
 
 	@Id
 	private int id;
@@ -19,7 +19,7 @@ public class Assignment {
 	
 	
 	public Assignment(String name, String description, int point) {
-		this.id = ID_GENERATOR.getAndIncrement();
+		this.id = ID_GENERATOR.get();
 		this.name = name;
 		this.description = description;
 		this.point = point;
@@ -30,6 +30,10 @@ public class Assignment {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public boolean isDone() {
 		return done;
 	}
@@ -60,5 +64,9 @@ public class Assignment {
 
 	public void setPoint(int point) {
 		this.point = point;
+	}
+
+	public static int setID_GENERATOR() {
+		return ID_GENERATOR.getAndIncrement();
 	}
 }
