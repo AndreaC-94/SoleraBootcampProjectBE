@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "groups")
 public class Group {
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
 	@Id
 	private int id;
@@ -27,7 +27,13 @@ public class Group {
 	
 	@Override
 	public String toString() {
-		return "Group [name=" + name + ", assignmentList=" + assignmentList + ", points=" + points + "]";
+		String output = "\nGroup id: " + id + "\nGroup name: " + name + "\nGroup points: " + points + "\n";
+		for (Assignment assignment : assignmentList) {
+			output += "\nAssignment id: " + assignment.getId() + "\nAssignment name: " + assignment.getName() +
+						"\nAssignment description: " + assignment.getDescription() + "\nAssignment point: " + 
+						assignment.getPoint() + "\nAssignment done: " + assignment.isDone();
+		}
+		return output;
 	}
 	
 	public int getId() {

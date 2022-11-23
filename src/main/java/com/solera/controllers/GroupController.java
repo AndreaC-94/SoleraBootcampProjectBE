@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.solera.DTO.GroupAssignmentDTO;
 import com.solera.DTO.GroupDTO;
 import com.solera.entities.Group;
 import com.solera.services.GroupService;
@@ -68,6 +69,17 @@ public class GroupController {
     @PathVariable ("groupNameNew") String groupNameNew) throws Exception{
         try{
             String message = groupServices.editGroup(group, groupNameNew);
+            return new ResponseEntity<String>(message, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @PutMapping("/editAssignment")
+    @Transactional
+    public ResponseEntity<String> editGroupAssignment(@RequestBody GroupAssignmentDTO group){
+        try{
+            String message = groupServices.editGroupAssignment(group);
             return new ResponseEntity<String>(message, HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);

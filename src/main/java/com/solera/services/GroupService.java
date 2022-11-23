@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.solera.DTO.GroupAssignmentDTO;
 import com.solera.DTO.GroupDTO;
 import com.solera.controllers.AssignmentController;
+import com.solera.entities.Assignment;
 import com.solera.entities.Group;
+import com.solera.repositories.AssignmentRepository;
 import com.solera.repositories.GroupRepository;
 
 @Service
@@ -15,6 +18,9 @@ public class GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    private AssignmentRepository assignmentRepository;
 
     @Autowired
     private AssignmentController assignmentController;
@@ -66,5 +72,28 @@ public class GroupService {
              tmpGroup.setName(groupNameNew);
              groupRepository.save(tmpGroup);
         return "Group \"" + group.getGroupName() + "\" has been changed to \"" + groupNameNew + "\"";
+    }
+
+    public String editGroupAssignment(GroupAssignmentDTO group) throws Exception{
+            if(assignmentRepository.existsById(group.getAssignmentId())){
+                Group tmpGroup = groupRepository.findById(group.getGroupId()).orElseThrow(() -> 
+                new Exception("There's no group with id: " + group.getGroupId() + " !"));
+                String assName = "error";
+                System.out.println("-----BEFORE-----\n" + tmpGroup.toString());
+                for (Assignment assignment : tmpGroup.getAssignmentList()) {
+                    if(assignment.getId() == group.getAssignmentId()){
+                        assignment.setDone(group.isDoneStatus());
+                        assName = assignment.getName();
+                        break;
+                    }
+                }
+                System.out.println("-----AFTER-----\n" + tmpGroup.toString());
+                String output = group.isDoneStatus() ? "done":"not done";
+                groupRepository.save(tmpGroup);
+                return "Assignment \"" + assName + "\" has been setted to " + output;
+            }
+            else{
+                throw new Exception("There's no assignment with id: " + group.getAssignmentId() + " !");
+            }
     }
 }

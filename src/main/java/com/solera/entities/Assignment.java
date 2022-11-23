@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="Assignments")
 public class Assignment {
 	
-	private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
+	private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
 	@Id
 	private int id;
